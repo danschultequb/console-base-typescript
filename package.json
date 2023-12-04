@@ -1,0 +1,59 @@
+{
+    "name": "@everyonesoftware/console-base-typescript",
+    "version": "1.0.0",
+    "description": "",
+    "author": "everyonesoftware",
+    "license": "ISC",
+    "main": "./outputs/sources/index.js",
+    "bin": {
+        "hello": "outputs/sources/index.js"
+    },
+    "pack-destination": "outputs",
+    "devDependencies": {
+        "@istanbuljs/nyc-config-typescript": "1.0.2",
+        "@types/assert": "1.5.10",
+        "@types/mocha": "10.0.6",
+        "assert": "2.1.0",
+        "mocha": "10.2.0",
+        "nyc": "15.1.0",
+        "source-map-support": "0.5.21",
+        "typescript": "5.3.2"
+    },
+    "scripts": {
+        "build": "tsc",
+        "pretest": "npm run build",
+        "test": "nyc mocha"
+    },
+    "mocha": {
+        "color": true,
+        "ui": "tdd",
+        "spec": "./outputs/tests/**/*.js",
+        "extension": [
+            "js"
+        ],
+        "require": [
+            "source-map-support/register"
+        ]
+    },
+    "nyc": {
+        "all": true,
+        "extension": [
+            ".ts"
+        ],
+        "exclude": [
+            "outputs/coverage",
+            "outputs/coverage-temp",
+            "outputs/**/*.d.ts"
+        ],
+        "reporter": [
+            "html",
+            "lcov",
+            "text",
+            "text-summary"
+        ],
+        "temp-dir": "outputs/coverage-temp",
+        "report-dir": "outputs/coverage",
+        "produce-source-map": true,
+        "source-map": true
+    }
+}
