@@ -14,19 +14,18 @@
     },
     "pack-destination": "outputs",
     "devDependencies": {
-        "@istanbuljs/nyc-config-typescript": "1.0.2",
         "@types/assert": "1.5.10",
         "@types/mocha": "10.0.6",
         "assert": "2.1.0",
         "mocha": "10.2.0",
-        "nyc": "15.1.0",
+        "c8": "8.0.1",
         "source-map-support": "0.5.21",
         "typescript": "5.3.2"
     },
     "scripts": {
         "build": "tsc",
         "pretest": "npm run build",
-        "test": "nyc mocha"
+        "test": "c8 mocha"
     },
     "mocha": {
         "color": true,
@@ -39,25 +38,19 @@
             "source-map-support/register"
         ]
     },
-    "nyc": {
+    "c8": {
         "all": true,
-        "extension": [
-            ".ts"
+        "src": [
+            "sources",
+            "tests"
         ],
-        "exclude": [
-            "outputs/coverage",
-            "outputs/coverage-temp",
-            "outputs/**/*.d.ts"
-        ],
+        "temp-directory": "outputs/coverage-temp",
+        "report-dir": "outputs/coverage",
         "reporter": [
             "html",
             "lcov",
             "text",
             "text-summary"
-        ],
-        "temp-dir": "outputs/coverage-temp",
-        "report-dir": "outputs/coverage",
-        "produce-source-map": true,
-        "source-map": true
+        ]
     }
 }
